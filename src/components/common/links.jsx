@@ -1,4 +1,4 @@
-export const baseUrl ="http://localhost:5000";
+export const baseUrl ="https://santechapi-backend.vercel.app";
 export const links = [
     { name: "My Space", link: "apis",icon:"fas fa-grip text-xl" },
     { name: "Api Hub", link: "hubs",icon:"fas fa-igloo" },
