@@ -41,7 +41,6 @@ export function UserAuthContextProvider({ children }) {
   return sendPasswordResetEmail(auth,email)
   }
   const getFirebaseToken = async () => {
-    const user = firebase.auth().currentUser;
     if (!user) {
       throw new Error('User not logged in');
     }
