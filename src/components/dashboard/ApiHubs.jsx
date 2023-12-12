@@ -18,7 +18,7 @@ function ApiHubs() {
     setLoading(true);
     console.log(updatedApi)
     try {
-      const response = await axios.get(`${baseUrl}/getallapis`, {
+      const response = await axios.get(`https://santechapi-backend.vercel.app/getallapis`, {
         headers: {
           'token': user.accessToken,
         },
