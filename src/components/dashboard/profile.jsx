@@ -1,14 +1,42 @@
-import React, { useState } from 'react'
-import { profilepic, random_profile_img } from '../common/links';
+import React, { useEffect, useState } from 'react'
+import { baseUrl, profilepic, random_profile_img } from '../common/links';
 import { useUserAuth } from '../context/UserAuthContext';
-import { apilist } from '../common/links';
+import nosubsImage from '../assert/Subscriber-bro.svg';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 
 function Profile() {
-  const { user } = useUserAuth();
+  const { user,logOut } = useUserAuth();
   const username = user?.email?.split("@")[0].replace(/[^a-zA-Z]/g, "") || "";
   const [loading,setloading] = useState(false);
+  const [subscribedApis, setSubscribedApis] = useState([]);
+
+  const fetchData = async () => {
+    setloading(true);
+  
+    try {
+      const apiListResponse = await axios.get(`${baseUrl}/getsubscribedapis`, {
+        headers: { 'token': user.accessToken }
+      });
+  
+      if (apiListResponse.status === 200) {
+        const updatedApiList = apiListResponse.data;
+        console.log(updatedApiList);
+        const limitedApiList = updatedApiList.slice(-4).reverse() ;
+  
+        setSubscribedApis(limitedApiList);
+      }
+  
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setloading(false);
+    }
+  };
+  
+  useEffect(() => {
+    fetchData();
+  }, [user]);
 
 
   return (
@@ -32,8 +60,14 @@ function Profile() {
                     {user.displayName || username}
                     </h4>
                     <p class="text-base font-normal text-gray-600"> {user.email}</p>
+                    <button onClick={()=> logOut()}
+			className="text-medium shadow-lg border inline-flex items-center gap-2 rounded-xl my-5 px-3 py-2 text-center text-base bg-red-300 text-red-500 border-red-400"
+		  >
+        <p className="font-semibold">Logout</p>
+         <i className="mt-0.5 fas fa-arrow-right-from-bracket "></i>
+		  </button>
                 </div> 
-                <h1 className=" mt-10 text-xl ms-5 font-semibold">Recently Subscribed</h1>
+                <h1 className=" mt-5 text-xl ms-5 font-semibold">Recently Subscribed</h1>
                 {loading ? 
     (
 <div className="mx-10 flex items-center justify-center mt-5 h-40 bg-violet-200 rounded-lg border-2 border-violet-300 bg-cover pb-4" >
@@ -41,23 +75,29 @@ function Profile() {
       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
     </svg>
-    </div>) : (<div classNameName="">
+    </div>) : (subscribedApis.length > 0 ? (<div classNameName="">
     <div className=" grid md:grid-cols-2 grid-cols-1 mt-3" >
-    {apilist.map((api)=>(
+    {subscribedApis.map((api)=>(
    <div  className="p-4">
    <div className={`h-52 w-[1fr] bg-gray-500 relative rounded-lg overflow-hidden shadow-lg`}>
+   <span className="bg-emerald-500 z-10 text-white px-3 py-1 text-xs absolute right-0 top-0 rounded-bl">Subscribed</span>
     <img src={api.img} alt="" className="w-full h-full object-fill relative brightness-50" />
      <span className="absolute md:left-[5%] mx-5 text-gray-50 top-[30%] pb-3">
-     <h1 className="text-xl font-semibold  mb-3">{api.name}</h1>
+     <h1 className="sm:text-2xl inline-flex items-center pe-3 gap-2 text-xl font-semibold mb-3">{api.name} <a href={api.link} className="inline-flex text-sm items-center mt-1.5 fas fa-arrow-up-right-from-square"></a> </h1>
      <p className="leading-relaxed text-sm text-gray-200 mb-3">{api.short_desc}</p>
      </span>  
    </div>
    
  </div>
-    )).slice(0,4)
+    ))
     }  
     </div>
-    </div>) }
+    </div>):(
+      <div className="flex items-center py-5 my-5 justify-center flex-col">
+      <img src={nosubsImage} alt="NO API KEY" className="w-44" />
+      <p className="text-base">Not Yet Subscribed Anything...</p>
+    </div>
+    ))}
     <Link to='/dashboard/apis#subscribed' className="text-center my-5 underline underline-offset-2 text-violet-500">More Apis</Link> 
     </div>  
     <br />

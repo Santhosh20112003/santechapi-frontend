@@ -136,6 +136,36 @@ function Apis() {
     }
   };
 
+  const unsubscribe = async(api,index) =>{
+    setLoading(true);
+
+    try {
+      const result = await axios.get(`${baseUrl}/removeSubscribeApi/${api.name}`, {
+        headers: { 'token': user.accessToken }
+      });
+
+      if (result.status === 200) {
+        toast.info(`${api.name} Api unsubscribed Successfully`, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        setSubscribedApis(subscribedApis.filter((_, i) => i !== index));
+      }
+      
+      
+    } catch (error) {
+      handleApiError(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   const handleApiError = (error) => {
     if (error.response) {
       if (error.response.status === 400) {
@@ -225,14 +255,14 @@ function Apis() {
                     className={`px-3 py-2 border-2 fas ${token.copied ? 'fa-check' : 'fa-clipboard'} ${token.copied ? 'bg-green-200 border-green-400' : 'bg-gray-200 border-gray-400'} text-gray-500 rounded-md`}
                     onClick={() => copyToClipboard(token.key, index)}
                   ></i>
-                   <AlertDialog.Root>
+                   <AlertDialog.Root >
     <AlertDialog.Trigger asChild>
       <button className="fas fa-trash bg-red-200 border-2 px-3 py-2 border-red-400 text-red-500 rounded-md">
       </button>
     </AlertDialog.Trigger>
-    <AlertDialog.Portal>
+    <AlertDialog.Portal >
       <AlertDialog.Overlay className="bg-blackA6 data-[state=open]:animate-overlayShow fixed inset-0" />
-      <AlertDialog.Content className="data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[500px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-white p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none">
+      <AlertDialog.Content className="data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[500px] translate-x-[-50%] translate-y-[-50%] z-50 rounded-[6px] bg-white p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none">
         <AlertDialog.Title className="text-mauve12 m-0 text-[17px] font-medium">
           Are you absolutely sure?
         </AlertDialog.Title>
@@ -253,7 +283,7 @@ function Apis() {
         </div>
       </AlertDialog.Content>
     </AlertDialog.Portal>
-  </AlertDialog.Root>
+                   </AlertDialog.Root>
                 </li>
               ))}
             </ul>
@@ -285,12 +315,40 @@ function Apis() {
                 {subscribedApis.map((api, index) => (
                   <div key={index} className="p-4 flex items-center justify-center md:block">
                     <div className={`lg:h-64 h-80 w-[1fr] max-w-[500px]  bg-gray-500 relative rounded-lg overflow-hidden shadow-lg`}>
-                      <span className="bg-emerald-500 z-50 text-white px-3 py-1 text-xs absolute right-0 top-0 rounded-bl">Subscribed</span>
+                      <span className="bg-emerald-500 z-10 text-white px-3 py-1 text-xs absolute right-0 top-0 rounded-bl">Subscribed</span>
                       <img src={api.img} alt="" className="w-full h-full object-fill relative brightness-50" />
                       <span className="absolute left-[10%] text-gray-50 bottom-[10%] pb-3">
                         <h1 className="sm:text-2xl inline-flex items-center pe-3 gap-2 text-xl font-semibold mb-3">{api.name} <a href={api.link} className="inline-flex text-sm items-center mt-1.5 fas fa-arrow-up-right-from-square"></a> </h1>
                         <p className="leading-relaxed text-gray-200 mb-5">{api.short_desc}</p>
-                        <label className='px-3 py-2 rounded-md bg-red-500 text-white '>Un Subscribe</label>
+                        
+                        <AlertDialog.Root >
+    <AlertDialog.Trigger asChild>
+    <button  className='px-3 py-2 rounded-md bg-red-500 text-white '>Un Subscribe</button>
+    </AlertDialog.Trigger>
+    <AlertDialog.Portal >
+      <AlertDialog.Overlay className="bg-blackA6 data-[state=open]:animate-overlayShow fixed inset-0" />
+      <AlertDialog.Content className="data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[500px] translate-x-[-50%] translate-y-[-50%] z-50 rounded-[6px] bg-white p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none">
+        <AlertDialog.Title className="text-mauve12 m-0 text-[17px] font-medium">
+          Are you absolutely sure?
+        </AlertDialog.Title>
+        <AlertDialog.Description className="text-mauve11 mt-4 mb-5 text-[15px] leading-normal">
+          This action cannot be undone. This will permanently delete your Api Key from our servers.
+        </AlertDialog.Description>
+        <div className="flex justify-end gap-[25px]">
+          <AlertDialog.Cancel asChild>
+            <button className="text-mauve11 bg-mauve4 hover:bg-mauve5 focus:shadow-mauve7 inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] font-medium leading-none outline-none focus:shadow-[0_0_0_2px]">
+              Cancel
+            </button>
+          </AlertDialog.Cancel>
+          <AlertDialog.Action asChild>
+            <button onClick={()=>{unsubscribe(api,index)}} className="text-red11 bg-red4 hover:bg-red5 focus:shadow-red7 inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] font-medium leading-none outline-none focus:shadow-[0_0_0_2px]">
+              Unsubscribe
+            </button>
+          </AlertDialog.Action>
+        </div>
+      </AlertDialog.Content>
+    </AlertDialog.Portal>
+                   </AlertDialog.Root>
                       </span>
                     </div>
                   </div>

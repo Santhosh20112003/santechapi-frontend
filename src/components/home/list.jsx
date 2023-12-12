@@ -13,7 +13,7 @@ function List() {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`${baseUrl}/getallapis`)
+      .get(`${baseUrl}/getapis`)
       .then((result) => {
         setApis(result.data);
         setLoading(false); 

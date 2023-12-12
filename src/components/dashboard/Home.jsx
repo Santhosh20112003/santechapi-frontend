@@ -3,13 +3,64 @@ import { Link } from 'react-router-dom';
 import { useUserAuth } from '../context/UserAuthContext';
 import hello from "../assert/undraw_fall_thyk.svg";
 import { useState } from 'react';
+import { useEffect } from 'react';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { baseUrl } from '../common/links';
 
 function Home() {
 	const { user } = useUserAuth();
+	const [apikey,setapikey] = useState(0);
+	const [activekey,setactivekey] = useState(0);
+	const [apis,setapis] = useState(0);
 	const [apikeyloading,setapikeyloading] = useState(false);
 	const [activekeyloading,setactivekeyloading] = useState(false);
 	const [apisloading,setapisloading] = useState(false);
     const username = user?.email?.split("@")[0].replace(/[^a-zA-Z]/g, "") || "";
+
+	useEffect(()=>{
+		fetchcount();
+	},[user])
+
+	const fetchcount = () =>{
+		setapikeyloading(true);
+		setactivekeyloading(true);
+		setapisloading(true);
+		try{
+			axios.get(`${baseUrl}/getcounts`,{
+				headers:{
+					"token":user.accessToken
+				}
+			})
+			.then(result=>{
+				if(result.status === 200){
+					setactivekey(result.data.totalcount);
+					setapikey(result.data.apikeycount);
+					setapis(result.data.apicount)
+				}
+			}).catch(err=>{
+				toast.success('Unable to fetch Details.', {
+					position: "top-center",
+					autoClose: 5000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					theme: "colored",
+				  });
+			})
+		}
+		catch(err){
+			console.log(err);
+		}
+		finally{
+			setapikeyloading(false);
+			setactivekeyloading(false);
+			setapisloading(false);
+		}
+	}
 
   return (
 	<div className='w-full h-[90vh] bg-violet-100 overflow-y-scroll  max-h-[90vh] flex flex-col'>
@@ -40,8 +91,8 @@ function Home() {
 				</span>
 			) :(
 				<span className="">
-	            <h1 className="text-xl font-semibold text-gray-700">Available Apis</h1>
-				<p className="text-lg mt-3">21</p></span>
+	            <h1 className="text-xl font-semibold text-gray-700">Total Apis Count</h1>
+				<p className="text-lg mt-3">{activekey}</p></span>
 			)
 		}
 		</span>
@@ -56,7 +107,7 @@ function Home() {
 			) : (
            <span className="">
 			 <h1 className="text-xl font-semibold text-gray-700"> Api Keys Count </h1>
-			<p className="text-lg mt-3">21</p>
+			<p className="text-lg mt-3">{apikey}</p>
 		   </span>
 			)
 
@@ -75,12 +126,13 @@ function Home() {
 			:(
 				<span className="">
 					<h1 className="text-xl font-semibold text-gray-700">Subscribed API Count</h1>
-			        <p className="text-lg mt-3">21</p>
+			        <p className="text-lg mt-3">{apis}</p>
 				</span>
 			)
 			}
 		</span>
 	  </span>
+	  <ToastContainer />
 	</div>
   )
 }

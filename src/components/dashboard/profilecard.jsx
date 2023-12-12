@@ -4,7 +4,7 @@ import { profilepic } from "../common/links";
 import { useUserAuth } from "../context/UserAuthContext";
 
 const FreeCard = () => {
-	const { user } = useUserAuth();
+	const { user,logOut } = useUserAuth();
   const username = user?.email?.split("@")[0].replace(/[^a-zA-Z]/g, "") || "";
 	return (
 
@@ -14,15 +14,24 @@ const FreeCard = () => {
 		  <img class="h-full w-full text-center bg-gray-800 rounded-full" src={user.photoURL || profilepic()} alt="logo" />
 				  <div className="absolute  bg-green-500 text-xs px-2 scale-75 rounded-full bottom-0 right-[11px] transform translate-x-2 translate-y-3 border-2 border-indigo-200 text-black">Active</div>        
                 </div>
-				<span className="-mt-4 pb-4 flex flex-col justify-center items-center">
-				<h1 className="text-sm font-semibold capitalize text-slate-600">{user.displayName || username}</h1>
-				<p className="text-sm text-slate-800">{user.email}</p>
+				<span className="-mt-4 pb-4 flex px-3 text-center flex-col justify-center items-center">
+				<h1 className="text-sm font-semibold  capitalize text-slate-600">{user.displayName || username}</h1>
+				{/* <p className="text-sm break-all text-slate-800">{user.email}</p> */}
 				</span>
-				<Link to={"profile"}
-			className="text-medium block rounded-full mb-5 py-[12px] px-11 text-center text-base bg-indigo-900 text-white"
-		  >
+			
+        <Link to={"profile"}
+			   className="text-medium block shadow-lg rounded-full mb-3 py-2 px-9 text-center text-base bg-indigo-900 text-white"
+		    >
 			View Profile
 		  </Link>
+
+      <button onClick={()=> logOut()}
+			className="text-medium shadow-lg rounded-full mb-5 py-2 px-9 text-center inline-flex items-center gap-2 text-base bg-red-300 text-red-500"
+		  >
+        <p className="font-semibold">Logout</p>
+        <i className="fas mt-0.5 fa-arrow-right-from-bracket"></i>
+		  </button>
+      
 		  </div> : 
 		  <div className="bg-gradient-to-b h-40 from-indigo-200 to-indigo-400 w-full flex  items-center justify-center shadow-lg mt-8 rounded-3xl">
           <svg

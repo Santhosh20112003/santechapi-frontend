@@ -2,39 +2,92 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { baseUrl } from '../common/links';
 import nokey from '../assert/No data-cuate.svg';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useUserAuth } from '../context/UserAuthContext';
 
 function ApiHubs() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [apis, setApis] = useState([]);
+  const [apis, setApis] = useState([{}]);
   const [filteredApis, setFilteredApis] = useState([]);
   const [loading, setLoading] = useState(false);
   const [notFound, setNotFound] = useState(false);
+  const { user } = useUserAuth();
+  const [updatedApi,setupdatedApi] = useState(false);
+  const fetchData = async () => {
+    setLoading(true);
+    console.log(updatedApi)
+    try {
+      const response = await axios.get(`${baseUrl}/getallapis`, {
+        headers: {
+          'token': user.accessToken,
+        },
+      });
+      setApis(response.data);
+      setFilteredApis(response.data);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setApis([]);
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    setLoading(true);
-    axios
-      .get(`${baseUrl}/getallapis`)
-      .then((result) => {
-        setApis(result.data);
-        setFilteredApis(result.data); 
-        setLoading(false); 
-      })
-      .catch((err) => {
-        setApis([]);
-        console.log(err);
+    fetchData();
+  }, [user]);
+
+  useEffect(() => {
+    fetchData();
+  }, [updatedApi]);
+
+
+  const subscribe = async (apiItem) => {
+    try {
+      const response = await axios.get(`${baseUrl}/addSubscribeApi/${apiItem.name}`, {
+        headers: {
+          'token': user.accessToken,
+        },
       });
-  }, []);
+
+      if (response.status === 200) {
+        setupdatedApi(!updatedApi);
+        console.log(apis) 
+        toast.info(`${apiItem.name} API is Subscribed`, {
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'light',
+        });
+      }
+    } catch (err) {
+      console.error('Error subscribing:', err);
+
+      toast.error(`Error Occurred with ${err}`, {
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+      });
+    }
+  };
 
   const handleSearch = (e) => {
     e.preventDefault();
     setLoading(true);
-  
-    const filtered = apis.filter((api) =>
-      api.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  
+
+    const filtered = apis.filter((api) => api.name.toLowerCase().includes(searchTerm.toLowerCase()));
+
     setLoading(false);
-  
+
     if (filtered.length > 0) {
       setNotFound(false);
       setFilteredApis(filtered);
@@ -67,6 +120,7 @@ function ApiHubs() {
           </div>
           <input
             type="search"
+            autoFocus
             id="default-search"
             className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-violet-500 focus:border-violet-500"
             placeholder="Search APIs..."
@@ -113,8 +167,9 @@ function ApiHubs() {
         <div className="mt-3">
           <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
             {filteredApis.map((api) => (
-              <div className="p-4" key={api.name}>
+              <div className="p-4 flex items-center justify-center md:block" key={api.name}>
                 <div className="lg:h-60 h-80 w-full max-w-[500px] bg-gray-500 relative rounded-lg overflow-hidden shadow-lg">
+                {api.subscribed ? (<span className="bg-emerald-500 z-10 text-white px-3 py-1 text-xs absolute right-0 top-0 rounded-bl">Subscribed</span>) :''}
                   <img
                     src={api.img}
                     alt=""
@@ -131,9 +186,11 @@ function ApiHubs() {
                     <p className="leading-relaxed break-words text-gray-200 mb-3">
                       {api.short_desc}
                     </p>
-                    <button className="px-3 py-2 rounded-md bg-violet-500 text-white">
+                    {api.subscribed ? (<button className="px-3 py-2 rounded-md bg-red-400 text-white">
+                      Subscribed
+                    </button> ): (<button onClick={()=>{subscribe(api)}} className="px-3 py-2 rounded-md bg-violet-500 text-white">
                       Subscribe
-                    </button>
+                    </button>)}
                   </span>
                 </div>
               </div>
@@ -141,6 +198,7 @@ function ApiHubs() {
           </div>
         </div>
       )}
+      <ToastContainer/>
     </div>
   );
 }

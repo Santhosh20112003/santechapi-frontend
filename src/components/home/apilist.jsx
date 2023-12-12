@@ -16,7 +16,7 @@ function ApiHubs() {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`${baseUrl}/getallapis`)
+      .get(`${baseUrl}/getapis`)
       .then((result) => {
         setApis(result.data);
         setFilteredApis(result.data); 
