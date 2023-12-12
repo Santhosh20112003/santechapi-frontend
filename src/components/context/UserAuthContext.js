@@ -40,18 +40,13 @@ export function UserAuthContextProvider({ children }) {
   function forgetpassword(email){
   return sendPasswordResetEmail(auth,email)
   }
-  async function getUserToken() {
-    try {
-      if (user && user.auth && user.auth.currentuser && typeof user.auth.currentuser.getIdToken === 'function') {
-        const idToken = await user.auth.currentuser.getIdToken(true);
-        console.log(idToken);
-      } else {
-        throw new Error('Invalid user or missing getIdToken method');
-      }
-    } catch (error) {
-      console.log(error);
+  const getFirebaseToken = async () => {
+    const user = firebase.auth().currentUser;
+    if (!user) {
+      throw new Error('User not logged in');
     }
-  }
+    return await user.getIdToken();
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentuser) => {
@@ -65,7 +60,7 @@ export function UserAuthContextProvider({ children }) {
 
   return (
     <userAuthContext.Provider
-      value={{ user,apis, logIn, signUp, logOut, googleSignIn ,forgetpassword,GithubSignIn,getUserToken}}>
+      value={{ user,apis, logIn, signUp, logOut, googleSignIn ,forgetpassword,GithubSignIn,getFirebaseToken}}>
       {children}
     </userAuthContext.Provider>
   );

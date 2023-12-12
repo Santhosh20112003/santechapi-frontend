@@ -12,15 +12,15 @@ function ApiHubs() {
   const [filteredApis, setFilteredApis] = useState([]);
   const [loading, setLoading] = useState(false);
   const [notFound, setNotFound] = useState(false);
-  const { user } = useUserAuth();
+  const { user,getFirebaseToken } = useUserAuth();
   const [updatedApi,setupdatedApi] = useState(false);
   const fetchData = async () => {
     setLoading(true);
-    console.log(updatedApi)
+    const token = await getFirebaseToken();
     try {
       const response = await axios.get(`https://santechapi-backend.vercel.app/getallapis`, {
         headers: {
-          'token': user.accessToken,
+          'token': token,
         },
       });
       setApis(response.data);
