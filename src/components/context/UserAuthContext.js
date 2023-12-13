@@ -10,8 +10,7 @@ import {
   GithubAuthProvider,
 } from "firebase/auth";
 import { auth } from "../../config/firebase-config";
-import axios from "axios";
-import { baseUrl } from "../common/links";
+import jwt from 'jsonwebtoken';
 
 const userAuthContext = createContext();
 
@@ -40,17 +39,9 @@ export function UserAuthContextProvider({ children }) {
   function forgetpassword(email){
   return sendPasswordResetEmail(auth,email)
   }
-  async function getUserToken() {
-    try {
-      if (user && user.auth && user.auth.currentuser && typeof user.auth.currentuser.getIdToken === 'function') {
-        const idToken = await user.auth.currentuser.getIdToken(true);
-        console.log(idToken);
-      } else {
-        throw new Error('Invalid user or missing getIdToken method');
-      }
-    } catch (error) {
-      console.log(error);
-    }
+  const getUserToken = ()=> {
+    var token = jwt.sign(user.email, 'santhoshasjfaeyuea');
+    return token
   }
 
   useEffect(() => {
