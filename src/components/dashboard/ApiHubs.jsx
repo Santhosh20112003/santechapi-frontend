@@ -44,7 +44,7 @@ function ApiHubs() {
 
   const subscribe = async (apiItem) => {
     try {
-      const response = await axios.get(`${baseUrl}/addSubscribeApi/${apiItem.name}`, {
+      const response = await axios.get(`https://santechapiback.vercel.app/addSubscribeApi/${apiItem.name}`, {
         headers: {
           'token': user.accessToken,
         },

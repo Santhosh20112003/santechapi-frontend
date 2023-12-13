@@ -28,7 +28,7 @@ function Home() {
 		setactivekeyloading(true);
 		setapisloading(true);
 		try{
-			axios.get(`${baseUrl}/getcounts`,{
+			axios.get(`${baseUrl}/getcounts/${user.email}`,{
 				headers:{
 					"token":user.accessToken
 				}
