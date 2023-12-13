@@ -16,7 +16,7 @@ function ApiHubs() {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`${baseUrl}/getapis`)
+      .get(`https://santechapiback.vercel.app/getapis`)
       .then((result) => {
         setApis(result.data);
         setFilteredApis(result.data); 

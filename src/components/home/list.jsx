@@ -13,7 +13,7 @@ function List() {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`https://santechapi-backend.vercel.app/getapis`)
+      .get(`https://santechapiback.vercel.app/getapis`)
       .then((result) => {
         setApis(result.data);
         setLoading(false); 
