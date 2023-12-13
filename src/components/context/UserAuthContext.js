@@ -10,7 +10,6 @@ import {
   GithubAuthProvider,
 } from "firebase/auth";
 import { auth } from "../../config/firebase-config";
-import jwt from 'jsonwebtoken';
 
 const userAuthContext = createContext();
 
@@ -39,10 +38,7 @@ export function UserAuthContextProvider({ children }) {
   function forgetpassword(email){
   return sendPasswordResetEmail(auth,email)
   }
-  const getUserToken = ()=> {
-    var token = jwt.sign(user.email, 'santhoshasjfaeyuea');
-    return token
-  }
+ 
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentuser) => {

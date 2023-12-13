@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { baseUrl } from '../common/links';
 
 function Home() {
-	const { user,getUserToken } = useUserAuth();
+	const { user } = useUserAuth();
 	const [apikey,setapikey] = useState(0);
 	const [activekey,setactivekey] = useState(0);
 	const [apis,setapis] = useState(0);
@@ -30,7 +30,7 @@ function Home() {
 		try{
 			axios.get(`${baseUrl}/getcounts`,{
 				headers:{
-					"token":getUserToken
+					"token":user.accessToken
 				}
 			})
 			.then(result=>{
