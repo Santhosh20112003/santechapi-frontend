@@ -52,7 +52,7 @@ export function UserAuthContextProvider({ children }) {
 
   return (
     <userAuthContext.Provider
-      value={{ user,apis, logIn, signUp, logOut, googleSignIn ,forgetpassword,GithubSignIn,getUserToken}}>
+      value={{ user,apis, logIn, signUp, logOut, googleSignIn ,forgetpassword,GithubSignIn}}>
       {children}
     </userAuthContext.Provider>
   );
