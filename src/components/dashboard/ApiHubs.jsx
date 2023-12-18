@@ -14,6 +14,7 @@ function ApiHubs() {
   const [notFound, setNotFound] = useState(false);
   const { user } = useUserAuth();
   const [updatedApi,setupdatedApi] = useState(false);
+  
   var subscribedapireq = {
     method: 'POST',
     url: 'https://santechapiback.vercel.app/getallapis',
@@ -22,11 +23,12 @@ function ApiHubs() {
   };
   const fetchData = async () => {
     setLoading(true);
-    console.log(updatedApi)
+    console.log(updatedApi);
     try {
       const response = await axios.request(subscribedapireq);
-      setApis(response.data);
-      setFilteredApis(response.data);
+      const updatedApis = response.data.map(api => ({ ...api, loading: false }));
+      setApis(updatedApis);
+      setFilteredApis(updatedApis);
       setLoading(false);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -56,7 +58,17 @@ function ApiHubs() {
       const response = await axios.request(subscribereq);
       if (response.status === 200) {
         setupdatedApi(!updatedApi);
-        console.log(apis) 
+        console.log(apis);
+  
+    
+        const updatedApis = apis.map(api => {
+          if (api.name === apiItem.name) {
+            return { ...api, loading: true };
+          }
+          return api;
+        });
+        setApis(updatedApis);
+  
         toast.info(`${apiItem.name} API is Subscribed`, {
           position: 'top-center',
           autoClose: 5000,
@@ -71,31 +83,38 @@ function ApiHubs() {
     } catch (err) {
       if(err.response && err.response.status === 403){
         console.error('Error subscribing:', err);
-      toast.info(`Create Api Key inorder to Subscribe An Api`, {
-        position: 'top-center',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'light',
-      });
-      }
-      else{
+        toast.info(`Create Api Key in order to Subscribe to an API`, {
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'light',
+        });
+      } else {
         console.error('Error subscribing:', err);
-      toast.error(`Error Occurred with ${err}`, {
-        position: 'top-center',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'colored',
-      });
+        toast.error(`Error occurred with ${err}`, {
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored',
+        });
       }
-    } finally{
+    } finally {
+      const updatedApis = apis.map(api => {
+        if (api.name === apiItem.name) {
+          return { ...api, loading: false };
+        }
+        return api;
+      });
+      setApis(updatedApis);
+      
       setLoading(false);
     }
   };
@@ -208,8 +227,26 @@ function ApiHubs() {
                     </p>
                     {api.subscribed ? (<button className="px-3 py-2 rounded-md bg-red-400 text-white">
                       Subscribed
-                    </button> ): (<button onClick={()=>{subscribe(api)}} className="px-3 py-2 rounded-md bg-violet-500 text-white">
-                      Subscribe
+                    </button> ): (<button onClick={()=>{subscribe(api)}} className="px-3 py-2 rounded-md bg-violet-500 text-white inline-flex items-center justify-center gap-3">
+                      Subscribe {api.loading ? (<div> <svg
+            className="animate-spin w-8 text-violet-500"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+            ></circle>
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+          </svg></div>):''}
                     </button>)}
                   </span>
                 </div>
