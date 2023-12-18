@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { baseUrl, profilepic, random_profile_img } from '../common/links';
+import {  profilepic, random_profile_img, secret } from '../common/links';
 import { useUserAuth } from '../context/UserAuthContext';
 import nosubsImage from '../assert/Subscriber-bro.svg';
 import {Link} from 'react-router-dom';
