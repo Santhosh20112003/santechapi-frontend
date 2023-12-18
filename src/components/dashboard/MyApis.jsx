@@ -28,34 +28,33 @@ function Apis() {
     data: {email: user.email}
   };
   
+  const fetchData = async () => {
+    setLoading(true);
+    setSubscribedApisLoading(true);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      setSubscribedApisLoading(true);
+    try {
+      const apiKeysResponse = await axios.request(apikeysreq);
 
-      try {
-        const apiKeysResponse = await axios.request(apikeysreq);
+      const subscribedApisResponse = await axios.request(options);
 
-        const subscribedApisResponse = await axios.request(options);
-
-        if (apiKeysResponse.status === 200) {
-          const updatedApiKeys = apiKeysResponse.data.map((token) => ({
-            key: token,
-            copied: false
-          }));
-          setApiKeys(updatedApiKeys);
-        }
-
-        setSubscribedApis(subscribedApisResponse.data);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-        setSubscribedApisLoading(false);
+      if (apiKeysResponse.status === 200) {
+        const updatedApiKeys = apiKeysResponse.data.map((token) => ({
+          key: token,
+          copied: false
+        }));
+        setApiKeys(updatedApiKeys);
       }
-    };
 
+      setSubscribedApis(subscribedApisResponse.data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+      setSubscribedApisLoading(false);
+    }
+  };
+  
+  useEffect(() => {
     fetchData();
   }, [user]);
 
