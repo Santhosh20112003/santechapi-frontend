@@ -27,6 +27,7 @@ function ApiHubs() {
     try {
       const response = await axios.request(subscribedapireq);
       const updatedApis = response.data.map(api => ({ ...api, loading: false }));
+      console.log(updatedApis)
       setApis(updatedApis);
       setFilteredApis(updatedApis);
       setLoading(false);
@@ -222,7 +223,7 @@ function ApiHubs() {
                     {api.subscribed ? (<button className="px-3 py-2 rounded-md bg-red-400 text-white">
                       Subscribed
                     </button> ): (<button onClick={()=>{subscribe(api)}} className="px-3 py-2 rounded-md bg-violet-500 text-white inline-flex items-center justify-center gap-3">
-                      Subscribe {api.loading ? (<div> <svg
+                      Subscribe {api.loading ? <svg
             className="animate-spin w-8 text-violet-500"
             fill="none"
             viewBox="0 0 24 24"
@@ -240,7 +241,7 @@ function ApiHubs() {
               fill="currentColor"
               d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
             ></path>
-          </svg></div>):''}
+          </svg>:''}
                     </button>)}
                   </span>
                 </div>
