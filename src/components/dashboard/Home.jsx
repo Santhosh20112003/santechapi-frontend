@@ -35,22 +35,22 @@ function Home() {
 		setapisloading(true);
 		try {
 		const result = await axios.request(fetchcountreq);
-		if (result.status === 200) {
+		// if (result.status === 200) {
 		setactivekey(result.data.totalcount);
 		setapikey(result.data.apikeycount);
 		setapis(result.data.apicount);
-		}
+		
 		} catch (err) {
-		toast.success("Unable to fetch Details.", {
-		position: "top-center",
-		autoClose: 5000,
-		hideProgressBar: false,
-		closeOnClick: true,
-		pauseOnHover: true,
-		draggable: true,
-		progress: undefined,
-		theme: "colored",
-		});
+		// toast.success("Unable to fetch Details.", {
+		// position: "top-center",
+		// autoClose: 5000,
+		// hideProgressBar: false,
+		// closeOnClick: true,
+		// pauseOnHover: true,
+		// draggable: true,
+		// progress: undefined,
+		// theme: "colored",
+		// });
 		} finally {
 		setapikeyloading(false);
 		setactivekeyloading(false);
