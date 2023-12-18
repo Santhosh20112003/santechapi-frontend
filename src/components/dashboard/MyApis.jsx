@@ -126,7 +126,7 @@ function Apis() {
 
     try {
       var createapireq = {
-        method: 'DELETE',
+        method: 'GET',
         url: `https://santechapiback.vercel.app/createapikey`,
         headers: {'Content-Type': 'application/json','secret':secret},
         data: {email: user.email}
