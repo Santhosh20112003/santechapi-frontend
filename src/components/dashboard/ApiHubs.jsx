@@ -68,8 +68,21 @@ function ApiHubs() {
         });
       }
     } catch (err) {
-      console.error('Error subscribing:', err);
-
+      if(err.response && err.response.status === 403){
+        console.error('Error subscribing:', err);
+      toast.error(`Create Api Key inorder to Subscribe An Api`, {
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+      });
+      }
+      else{
+        console.error('Error subscribing:', err);
       toast.error(`Error Occurred with ${err}`, {
         position: 'top-center',
         autoClose: 5000,
@@ -80,6 +93,7 @@ function ApiHubs() {
         progress: undefined,
         theme: 'colored',
       });
+      }
     }
   };
 
