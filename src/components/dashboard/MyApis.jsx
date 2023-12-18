@@ -85,7 +85,7 @@ function Apis() {
   };
 
   const deleteApiKey = async (token, index) => {
-    setLoading(true);
+    setSubscribedApisLoading(true);
     try {
       var deleteapireq = {
         method: 'POST',
@@ -120,7 +120,7 @@ function Apis() {
         theme: "colored",
       });
     } finally {
-      setLoading(false);
+      setSubscribedApisLoading(false);
     }
   };
 
