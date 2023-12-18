@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { baseUrl, secret } from '../common/links';
+import { secret } from '../common/links';
 import nokey from '../assert/No data-cuate.svg';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -14,17 +14,16 @@ function ApiHubs() {
   const [notFound, setNotFound] = useState(false);
   const { user } = useUserAuth();
   const [updatedApi,setupdatedApi] = useState(false);
+  var subscribedapireq = {
+    method: 'POST',
+    url: 'https://santechapiback.vercel.app/getallapis',
+    headers: {'Content-Type': 'application/json','secret':secret},
+    data: {email: user.email}
+  };
   const fetchData = async () => {
     setLoading(true);
     console.log(updatedApi)
     try {
-      var subscribedapireq = {
-
-        method: 'POST',
-        url: 'https://santechapiback.vercel.app/getallapis',
-        headers: {'Content-Type': 'application/json','secret':secret},
-        data: {email: user.email}
-      };
       const response = await axios.request(subscribedapireq);
       setApis(response.data);
       setFilteredApis(response.data);
