@@ -38,7 +38,7 @@ function Nav() {
             </div>
             
             {user ? 
-        (<span className="hidden md:flex items-center gap-3">
+        (<span className="flex items-center gap-3">
 			<Link to="/dashboard" className="px-3 py-2 font-bold rounded text-gray-600 ">Dashboard</Link>
 			<button onClick={(e)=>{localStorage.removeItem("token");
             logOut();
