@@ -19,6 +19,7 @@ function ApiHubs() {
     console.log(updatedApi)
     try {
       var subscribedapireq = {
+        
         method: 'POST',
         url: 'https://santechapiback.vercel.app/getallapis',
         headers: {'Content-Type': 'application/json','secret':secret},
