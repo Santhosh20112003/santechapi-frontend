@@ -18,11 +18,13 @@ function ApiHubs() {
     setLoading(true);
     console.log(updatedApi)
     try {
-      const response = await axios.get(`${baseUrl}/getallapis`, {
-        headers: {
-          'token': user.accessToken,
-        },
-      });
+      var subscribedapireq = {
+        method: 'POST',
+        url: 'https://santechapiback.vercel.app/getallapis',
+        headers: {'Content-Type': 'application/json','secret':secret},
+        data: {email: user.email}
+      };
+      const response = await axios.request(subscribedapireq);
       setApis(response.data);
       setFilteredApis(response.data);
       setLoading(false);
