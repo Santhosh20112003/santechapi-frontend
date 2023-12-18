@@ -16,6 +16,19 @@ function Apis() {
   const [loading, setLoading] = useState(false);
   const [subscribedApis, setSubscribedApis] = useState([]);
   const [subscribedApisLoading, setSubscribedApisLoading] = useState(false);
+  var apikeysreq = {
+    method: 'POST',
+    url: 'https://santechapiback.vercel.app/getapiKeys',
+    headers: {'Content-Type': 'application/json'},
+    data: {email: user.email}
+  };
+  var options = {
+    method: 'POST',
+    url: 'https://santechapiback.vercel.app/getsubscribedapis',
+    headers: {'Content-Type': 'application/json'},
+    data: {email: 'shanmugamsanthosh22@gmail.com'}
+  };
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,13 +36,9 @@ function Apis() {
       setSubscribedApisLoading(true);
 
       try {
-        const apiKeysResponse = await axios.post(`https://santechapiback.vercel.app/getapiKeys`, {
-          body: { 'email': user.email }
-        });
+        const apiKeysResponse = await axios.request(apikeysreq);
 
-        const subscribedApisResponse = await axios.post(`https://santechapiback.vercel.app/getsubscribedapis`, {
-          body: { 'email': user.email }
-        });
+        const subscribedApisResponse = await axios.request(options);
 
         if (apiKeysResponse.status === 200) {
           const updatedApiKeys = apiKeysResponse.data.map((token) => ({
