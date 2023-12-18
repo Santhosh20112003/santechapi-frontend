@@ -4,7 +4,7 @@ export const links = [
     { name: "Api Hub", link: "hubs",icon:"fas fa-igloo" },
     { name: "Profile", link: "profile",icon:"fas fa-address-card" },
   ];
-
+export const secret = "sannisaprthisrilila";
 export const main_links = [
     { name: "Home", link: "/home" },
     { name: "Api List", link: "/apilist" },

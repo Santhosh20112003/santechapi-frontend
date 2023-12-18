@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { baseUrl } from '../common/links';
+import { secret } from '../common/links';
 import { useUserAuth } from '../context/UserAuthContext';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -8,7 +8,6 @@ import nokeyImage from '../assert/No data-pana.svg';
 import nosubsImage from '../assert/Subscriber-bro.svg';
 import * as AlertDialog from '@radix-ui/react-alert-dialog';
 import * as Tooltip from '@radix-ui/react-tooltip';
-import * as Dialog from '@radix-ui/react-dialog';
 
 function Apis() {
   const { user } = useUserAuth();
@@ -19,13 +18,13 @@ function Apis() {
   var apikeysreq = {
     method: 'POST',
     url: 'https://santechapiback.vercel.app/getapiKeys',
-    headers: {'Content-Type': 'application/json'},
+    headers: {'Content-Type': 'application/json','secret':secret},
     data: {email: user.email}
   };
   var options = {
     method: 'POST',
     url: 'https://santechapiback.vercel.app/getsubscribedapis',
-    headers: {'Content-Type': 'application/json'},
+    headers: {'Content-Type': 'application/json','secret':secret},
     data: {email: user.email}
   };
   
@@ -87,9 +86,13 @@ function Apis() {
 
   const deleteApiKey = async (token, index) => {
     try {
-      const result = await axios.delete(`${baseUrl}/deleteapiKeys/${token}`, {
-        headers: { 'token': user.accessToken }
-      });
+      var deleteapireq = {
+        method: 'DELETE',
+        url: `https://santechapiback.vercel.app/deleteapiKeys/${token}`,
+        headers: {'Content-Type': 'application/json','secret':secret},
+        data: {email: user.email}
+      };
+      const result = await axios.request(deleteapireq);
       if (result.status === 200) {
         toast.error('API Key Deleted Successfully', {
           position: "top-center",
@@ -122,9 +125,13 @@ function Apis() {
     setLoading(true);
 
     try {
-      const result = await axios.get(`${baseUrl}/createapikey`, {
-        headers: { 'token': user.accessToken }
-      });
+      var createapireq = {
+        method: 'DELETE',
+        url: `https://santechapiback.vercel.app/createapikey`,
+        headers: {'Content-Type': 'application/json','secret':secret},
+        data: {email: user.email}
+      };
+      const result = await axios.request(createapireq);
       if (result.status === 200) {
         toast.success('API Key Created Successfully', {
           position: "top-center",
@@ -150,9 +157,13 @@ function Apis() {
     setLoading(true);
 
     try {
-      const result = await axios.get(`${baseUrl}/removeSubscribeApi/${api.name}`, {
-        headers: { 'token': user.accessToken }
-      });
+      var createapireq = {
+        method: 'GET',
+        url: `https://santechapiback.vercel.app/removeSubscribeApi/${api.name}`,
+        headers: {'Content-Type': 'application/json','secret':secret},
+        data: {email: user.email}
+      };
+      const result = await axios.request(createapireq);
 
       if (result.status === 200) {
         toast.info(`${api.name} Api unsubscribed Successfully`, {
