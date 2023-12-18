@@ -15,10 +15,13 @@ function Profile() {
     setloading(true);
   
     try {
-      const apiListResponse = await axios.get(`${baseUrl}/getsubscribedapis`, {
-        headers: { 'token': user.accessToken }
-      });
-  
+      var recentreq = {
+        method: 'POST',
+        url: `https://santechapiback.vercel.app/getsubscribedapis`,
+        headers: {'Content-Type': 'application/json','secret':secret},
+        data: {email: user.email}
+      };
+      const apiListResponse = await axios.request(recentreq);
       if (apiListResponse.status === 200) {
         const updatedApiList = apiListResponse.data;
         console.log(updatedApiList);
