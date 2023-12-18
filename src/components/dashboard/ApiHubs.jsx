@@ -45,6 +45,7 @@ function ApiHubs() {
 
 
   const subscribe = async (apiItem) => {
+    setLoading(true);
     try {
       const subscribereq = {
         method: 'POST',
@@ -70,7 +71,7 @@ function ApiHubs() {
     } catch (err) {
       if(err.response && err.response.status === 403){
         console.error('Error subscribing:', err);
-      toast.error(`Create Api Key inorder to Subscribe An Api`, {
+      toast.info(`Create Api Key inorder to Subscribe An Api`, {
         position: 'top-center',
         autoClose: 5000,
         hideProgressBar: false,
@@ -78,7 +79,7 @@ function ApiHubs() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: 'colored',
+        theme: 'light',
       });
       }
       else{
@@ -94,6 +95,8 @@ function ApiHubs() {
         theme: 'colored',
       });
       }
+    } finally{
+      setLoading(false);
     }
   };
 
