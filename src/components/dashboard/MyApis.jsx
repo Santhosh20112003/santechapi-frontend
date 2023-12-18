@@ -28,7 +28,7 @@ function Apis() {
         });
 
         const subscribedApisResponse = await axios.get(`${baseUrl}/getsubscribedapis`, {
-          headers: { 'token': user.accessToken }
+          body: { 'token': user.email }
         });
 
         if (apiKeysResponse.status === 200) {
