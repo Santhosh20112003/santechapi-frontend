@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { baseUrl } from '../common/links';
+import { baseUrl, secret } from '../common/links';
 import nokey from '../assert/No data-cuate.svg';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -19,7 +19,7 @@ function ApiHubs() {
     console.log(updatedApi)
     try {
       var subscribedapireq = {
-        
+
         method: 'POST',
         url: 'https://santechapiback.vercel.app/getallapis',
         headers: {'Content-Type': 'application/json','secret':secret},
