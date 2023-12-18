@@ -158,7 +158,7 @@ function Apis() {
 
     try {
       var createapireq = {
-        method: 'GET',
+        method: 'POST',
         url: `https://santechapiback.vercel.app/removeSubscribeApi/${api.name}`,
         headers: {'Content-Type': 'application/json','secret':secret},
         data: {email: user.email}
