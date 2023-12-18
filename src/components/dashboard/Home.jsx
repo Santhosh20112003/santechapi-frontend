@@ -18,6 +18,12 @@ function Home() {
 	const [activekeyloading,setactivekeyloading] = useState(false);
 	const [apisloading,setapisloading] = useState(false);
     const username = user?.email?.split("@")[0].replace(/[^a-zA-Z]/g, "") || "";
+	var fetchcountreq = {
+        method: 'POST',
+        url: `https://santechapiback.vercel.app/getcounts`,
+        headers: {'Content-Type': 'application/json','secret':secret},
+        data: {email: user.email}
+      };
 
 	useEffect(()=>{
 		fetchcount();
@@ -28,11 +34,7 @@ function Home() {
 		setactivekeyloading(true);
 		setapisloading(true);
 		try{
-			axios.get(`${baseUrl}/getcounts`,{
-				headers:{
-					"token":user.accessToken
-				}
-			})
+			axios.request(fetchcountreq)
 			.then(result=>{
 				if(result.status === 200){
 					setactivekey(result.data.totalcount);
