@@ -47,8 +47,14 @@ function ApiHubs() {
 
 
   const subscribe = async (apiItem) => {
-    setLoading(true);
     try {
+      const updatedApis = apis.map(api => {
+        if (api.name === apiItem.name) {
+          return { ...api, loading: true };
+        }
+        return api;
+      });
+      setApis(updatedApis);
       const subscribereq = {
         method: 'POST',
         url: `https://santechapiback.vercel.app/addSubscribeApi/${apiItem.name}`,
@@ -59,16 +65,6 @@ function ApiHubs() {
       if (response.status === 200) {
         setupdatedApi(!updatedApi);
         console.log(apis);
-  
-    
-        const updatedApis = apis.map(api => {
-          if (api.name === apiItem.name) {
-            return { ...api, loading: true };
-          }
-          return api;
-        });
-        setApis(updatedApis);
-  
         toast.info(`${apiItem.name} API is Subscribed`, {
           position: 'top-center',
           autoClose: 5000,
@@ -114,8 +110,6 @@ function ApiHubs() {
         return api;
       });
       setApis(updatedApis);
-      
-      setLoading(false);
     }
   };
 
