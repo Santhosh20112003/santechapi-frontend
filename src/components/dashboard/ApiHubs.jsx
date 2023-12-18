@@ -46,12 +46,14 @@ function ApiHubs() {
 
   const subscribe = async (apiItem) => {
     try {
-      const response = await axios.get(`https://santechapiback.vercel.app/addSubscribeApi/${apiItem.name}`, {
-        headers: {
-          'token': user.accessToken,
-        },
-      });
-
+      const subscribereq = {
+        method: 'POST',
+        url: `https://santechapiback.vercel.app/addSubscribeApi/${apiItem.name}`,
+        headers: {'Content-Type': 'application/json','secret':secret},
+        data: {email: user.email}
+      };
+      const response = await axios.request(subscribereq);
+      console.log(response)
       if (response.status === 200) {
         setupdatedApi(!updatedApi);
         console.log(apis) 
