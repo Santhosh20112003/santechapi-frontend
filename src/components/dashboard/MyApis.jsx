@@ -26,7 +26,7 @@ function Apis() {
     method: 'POST',
     url: 'https://santechapiback.vercel.app/getsubscribedapis',
     headers: {'Content-Type': 'application/json'},
-    data: {email: 'shanmugamsanthosh22@gmail.com'}
+    data: {email: user.email}
   };
   
 
