@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { baseUrl } from '../common/links';
+import { secret } from '../common/links';
 
 function Home() {
 	const { user } = useUserAuth();
