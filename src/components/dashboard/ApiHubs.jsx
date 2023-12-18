@@ -26,7 +26,7 @@ function ApiHubs() {
     console.log(updatedApi);
     try {
       const response = await axios.request(subscribedapireq);
-      const updatedApis = response.data.map(api => ({ ...api, loading: true }));
+      const updatedApis = response.data.map(api => ({ ...api, loading: false }));
       console.log(updatedApis)
       setApis(updatedApis);
       setFilteredApis(updatedApis);
@@ -55,7 +55,7 @@ function ApiHubs() {
         }
         return api;
       });
-      setApis(updatedApis);
+      setApis([updatedApis]);
       console.log( apiItem.loading);
       const subscribereq = {
         method: 'POST',
