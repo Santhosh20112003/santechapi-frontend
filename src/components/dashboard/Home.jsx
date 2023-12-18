@@ -29,41 +29,34 @@ function Home() {
 		fetchcount();
 	},[user])
 
-	const fetchcount = () =>{
+	const fetchcount = async () => {
 		setapikeyloading(true);
 		setactivekeyloading(true);
 		setapisloading(true);
-		try{
-			axios.request(fetchcountreq)
-			.then(result=>{
-				if(result.status === 200){
-					setactivekey(result.data.totalcount);
-					setapikey(result.data.apikeycount);
-					setapis(result.data.apicount)
-				}
-			}).catch(err=>{
-				toast.success('Unable to fetch Details.', {
-					position: "top-center",
-					autoClose: 5000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: true,
-					draggable: true,
-					progress: undefined,
-					theme: "colored",
-				  });
-			})
+		try {
+		const result = await axios.request(fetchcountreq);
+		if (result.status === 200) {
+		setactivekey(result.data.totalcount);
+		setapikey(result.data.apikeycount);
+		setapis(result.data.apicount);
 		}
-		catch(err){
-			console.log(err);
+		} catch (err) {
+		toast.success("Unable to fetch Details.", {
+		position: "top-center",
+		autoClose: 5000,
+		hideProgressBar: false,
+		closeOnClick: true,
+		pauseOnHover: true,
+		draggable: true,
+		progress: undefined,
+		theme: "colored",
+		});
+		} finally {
+		setapikeyloading(false);
+		setactivekeyloading(false);
+		setapisloading(false);
 		}
-		finally{
-			setapikeyloading(false);
-			setactivekeyloading(false);
-			setapisloading(false);
-		}
-	}
-
+		};
   return (
 	<div className='w-full h-[90vh] bg-violet-100 overflow-y-scroll  max-h-[90vh] flex flex-col'>
 		<div className="w-[96%] mt-5 shadow-md px-5 py-16  flex items-center justify-center md:gap-5  md:justify-between rounded-xl bg-gray-100 bg-[url('https://dashboard.algolia.com/client-assets/c1c9361fe75370d1b156733e962f7214/514f2ec3798090c6df00dad1592c8166.svg')] mx-auto">
