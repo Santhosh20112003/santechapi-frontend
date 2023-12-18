@@ -24,11 +24,13 @@ function Apis() {
 
       try {
         const apiKeysResponse = await axios.get(`https://santechapiback.vercel.app/getapiKeys`, {
-          body: { 'email': user.email }
+          body: { 'email': user.email },
+          headers:{'Content-Type':'application/json'}
         });
 
         const subscribedApisResponse = await axios.get(`https://santechapiback.vercel.app/getsubscribedapis`, {
-          body: { 'email': user.email }
+          body: { 'email': user.email },
+          headers:{'Content-Type':'application/json'}
         });
 
         if (apiKeysResponse.status === 200) {
