@@ -43,6 +43,7 @@ function Apis() {
       } catch (error) {
         console.error(error);
       } finally {
+        console.log(apiKeys)
         setLoading(false);
         setSubscribedApisLoading(false);
       }
