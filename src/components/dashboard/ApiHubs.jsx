@@ -53,7 +53,6 @@ function ApiHubs() {
         data: {email: user.email}
       };
       const response = await axios.request(subscribereq);
-      console.log(response)
       if (response.status === 200) {
         setupdatedApi(!updatedApi);
         console.log(apis) 

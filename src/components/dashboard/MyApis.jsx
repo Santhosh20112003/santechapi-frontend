@@ -87,7 +87,7 @@ function Apis() {
   const deleteApiKey = async (token, index) => {
     try {
       var deleteapireq = {
-        method: 'DELETE',
+        method: 'POST',
         url: `https://santechapiback.vercel.app/deleteapiKeys/${token}`,
         headers: {'Content-Type': 'application/json','secret':secret},
         data: {email: user.email}
@@ -126,7 +126,7 @@ function Apis() {
 
     try {
       var createapireq = {
-        method: 'GET',
+        method: 'POST',
         url: `https://santechapiback.vercel.app/createapikey`,
         headers: {'Content-Type': 'application/json','secret':secret},
         data: {email: user.email}
