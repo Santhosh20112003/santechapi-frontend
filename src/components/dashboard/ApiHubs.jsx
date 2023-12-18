@@ -56,6 +56,7 @@ function ApiHubs() {
         return api;
       });
       setApis(updatedApis);
+      console.log( apiItem.loading);
       const subscribereq = {
         method: 'POST',
         url: `https://santechapiback.vercel.app/addSubscribeApi/${apiItem.name}`,
@@ -220,7 +221,7 @@ function ApiHubs() {
                     <p className="leading-relaxed break-words text-gray-200 mb-3">
                       {api.short_desc}
                     </p>
-                    {api.subscribed ? (<button className="px-3 py-2 rounded-md bg-red-400 text-white">
+                    {api.subscribed ? (<button className="px-3 py-2 rounded-md bg-emerald-400 text-white">
                       Subscribed
                     </button> ): (<button onClick={()=>{subscribe(api)}} className="px-3 py-2 rounded-md bg-violet-500 text-white inline-flex items-center justify-center gap-3">
                       Subscribe {api.loading ? <svg
