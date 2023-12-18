@@ -23,11 +23,11 @@ function Apis() {
       setSubscribedApisLoading(true);
 
       try {
-        const apiKeysResponse = await axios.get(`https://santechapiback.vercel.app/getapiKeys`, {
+        const apiKeysResponse = await axios.post(`https://santechapiback.vercel.app/getapiKeys`, {
           body: { 'email': user.email }
         });
 
-        const subscribedApisResponse = await axios.get(`https://santechapiback.vercel.app/getsubscribedapis`, {
+        const subscribedApisResponse = await axios.post(`https://santechapiback.vercel.app/getsubscribedapis`, {
           body: { 'email': user.email }
         });
 
