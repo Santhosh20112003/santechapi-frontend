@@ -225,7 +225,7 @@ function ApiHubs() {
                       Subscribed
                     </button> ): (<button onClick={()=>{subscribe(api)}} className="px-3 py-2 rounded-md bg-violet-500 text-white inline-flex items-center justify-center gap-3">
                       Subscribe {api.loading ? <svg
-            className="animate-spin w-8 text-violet-500"
+            className="animate-spin w-4 text-white"
             fill="none"
             viewBox="0 0 24 24"
           >
