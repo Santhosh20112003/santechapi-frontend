@@ -20,6 +20,7 @@ function App() {
     <Header/>
     <Hero/>
     <CodeSnippet/>
+    
     <Code/>
     <List/>
     <Steps/>

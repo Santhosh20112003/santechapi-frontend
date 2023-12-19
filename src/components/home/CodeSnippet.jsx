@@ -23,8 +23,8 @@ export default function CodeSnippet() {
       </div>
       <div className="lg:w-1/2 w-full ">
         <h1 className="text-5xl text-gray-500 inline-flex items-end gap-3">Example Code <i className="fas hidden  lg:block fa-terminal text-xl px-3 h-fit py-1 rounded-md bg-gray-500 text-white"></i> </h1>
-        <p className="break-words text-gray-400 w-4/5 mt-10">SantechApi is a free online REST API Hub that you can use whenever you need Pseudo-real data for your website development without running any server-side code.</p>
-        <a target='_blank' href="https://stackblitz.com/edit/stackblitz-starters-uzzxka?file=src%2FApp.js" className="py-2 px-3 text-lg text-white mt-5 bg-violet-500 rounded-lg">Try it</a>
+        <p className="break-words text-gray-400 w-4/5 mt-10 mb-5">SantechApi is a free online REST API Hub that you can use whenever you need Pseudo-real data for your website development without running any server-side code.</p>
+        <a href="#code" className="py-2 px-3 text-lg text-white mt-5 bg-violet-500 rounded-lg">Live Example</a>
       </div>
     </div>
   );
