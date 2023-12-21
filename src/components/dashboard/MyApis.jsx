@@ -340,7 +340,7 @@ function Apis() {
                       <span className="bg-emerald-500 z-10 text-white px-3 py-1 text-xs absolute right-0 top-0 rounded-bl">Subscribed</span>
                       <img src={api.img} alt="" className="w-full h-full object-fill relative brightness-50" />
                       <span className="absolute left-[10%] text-gray-50 bottom-[10%] pb-3">
-                        <h1 className="sm:text-2xl inline-flex items-center pe-3 gap-2 text-xl font-semibold mb-3">{api.name} <a href={api.link} className="inline-flex text-sm items-center mt-1.5 fas fa-arrow-up-right-from-square"></a> </h1>
+                        <h1 className="sm:text-2xl inline-flex items-center pe-3 gap-2 text-xl font-semibold mb-3">{api.name} API{' '} <a href={api.link} className="inline-flex text-sm items-center mt-1.5 fas fa-arrow-up-right-from-square"></a> </h1>
                         <p className="leading-relaxed text-gray-200 mb-5">{api.short_desc}</p>
                         
                         <AlertDialog.Root >
