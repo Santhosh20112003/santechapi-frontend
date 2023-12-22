@@ -64,9 +64,9 @@ function Home() {
 		<h1 class=" lg:text-4xl text-3xl text-center md:text-left font-medium title-font mb-4 italic text-gray-900">Welcome <span className="text-violet-500 break-words capitalize">{user.displayName || username }</span> !</h1>
       <p class=" text-gray-500 ms-5 break-words text-center md:text-left text-base md:text-lg">Check what's happening on your Santech Api implementation.</p>
 	  <span className="grid py-10 w-full lg:grid-cols-3 sm:grid-cols-2 grid-cols-1  gap-5 flex-wrap">
-		<Link to="https://santhoshs-organization-1.gitbook.io/santech-api-hub-docs/" className="inline-flex break-all items-baseline gap-3 bg-violet-500 px-3 py-2 rounded-lg text-white shadow-lg justify-center">Documentation <i className="fas fa-arrow-up-right-from-square"></i></Link>
-		<Link to='/dashboard/apis' className="inline-flex items-baseline gap-3 bg-violet-500 px-3 py-2 rounded-lg text-white shadow-lg justify-center">API KEYS <i className="fas fa-key"></i></Link>
-		<Link to='/dashboard/hubs' className="inline-flex items-baseline gap-3 bg-violet-500 px-3 py-2 rounded-lg text-white shadow-lg justify-center">API Hub <i className="fas fa-igloo"></i></Link>
+		<Link to="https://santhoshs-organization-1.gitbook.io/santech-api-hub-docs/" className="inline-flex active:scale-90 transition-all break-all items-baseline gap-3 bg-violet-500 px-3 py-2 rounded-lg text-white shadow-lg justify-center">Documentation <i className="fas fa-arrow-up-right-from-square"></i></Link>
+		<Link to='/dashboard/apis' className="inline-flex active:scale-90 transition-all items-baseline gap-3 bg-violet-500 px-3 py-2 rounded-lg text-white shadow-lg justify-center">API KEYS <i className="fas fa-key"></i></Link>
+		<Link to='/dashboard/hubs' className="inline-flex active:scale-90 transition-all items-baseline gap-3 bg-violet-500 px-3 py-2 rounded-lg text-white shadow-lg justify-center">API Hub <i className="fas fa-igloo"></i></Link>
 	  </span>
 		</span>
 	  <span className=" hidden lg:flex">
