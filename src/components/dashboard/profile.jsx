@@ -66,7 +66,7 @@ function Profile() {
                     <button onClick={()=> logOut()}
 			className="text-medium shadow-lg border inline-flex items-center gap-2 rounded-xl my-5 px-3 py-2 text-center text-base bg-red-300 text-red-500 border-red-400"
 		  >
-        <p className="font-semibold">Logout</p>
+        <p className="font-semibold active:scale-90 transition-all">Logout</p>
          <i className="mt-0.5 fas fa-arrow-right-from-bracket "></i>
 		  </button>
                 </div> 
