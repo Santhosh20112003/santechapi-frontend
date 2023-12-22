@@ -20,13 +20,13 @@ const FreeCard = () => {
 				</span>
 			
         <Link to={"profile"}
-			   className="text-medium block shadow-lg rounded-full mb-3 py-2 px-9 text-center text-base bg-indigo-900 text-white"
+			   className="text-medium block shadow-lg active:scale-90 transition-all rounded-full mb-3 py-2 px-9 text-center text-base bg-indigo-900 text-white"
 		    >
 			View Profile
 		  </Link>
 
       <button onClick={()=> logOut()}
-			className="text-medium shadow-lg rounded-full mb-5 py-2 px-9 text-center inline-flex items-center gap-2 text-base bg-red-300 text-red-500"
+			className="text-medium shadow-lg active:scale-90 transition-all rounded-full mb-5 py-2 px-9 text-center inline-flex items-center gap-2 text-base bg-red-300 text-red-500"
 		  >
         <p className="font-semibold">Logout</p>
         <i className="fas mt-0.5 fa-arrow-right-from-bracket"></i>
