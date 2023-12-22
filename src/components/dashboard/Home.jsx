@@ -61,8 +61,8 @@ function Home() {
 	<div className='w-full h-[90vh] bg-violet-100 overflow-y-scroll  max-h-[90vh] flex flex-col'>
 		<div className="w-[96%] mt-5 shadow-md px-5 py-16  flex items-center justify-center md:gap-5  md:justify-between rounded-xl bg-gray-100 bg-[url('https://dashboard.algolia.com/client-assets/c1c9361fe75370d1b156733e962f7214/514f2ec3798090c6df00dad1592c8166.svg')] mx-auto">
 		<span className="mt-10">
-		<h1 class="text-2xl lg:text-4xl md:text-3xl text-center md:text-left font-medium title-font mb-4 italic text-gray-900">Welcome <span className="text-violet-500 break-words capitalize">{user.displayName || username }</span> !</h1>
-      <p class=" text-gray-500 ms-5 break-all text-base md:text-lg">Check what's happening on your Santech Api implementation.</p>
+		<h1 class=" lg:text-4xl text-3xl text-center md:text-left font-medium title-font mb-4 italic text-gray-900">Welcome <span className="text-violet-500 break-words capitalize">{user.displayName || username }</span> !</h1>
+      <p class=" text-gray-500 ms-5 break-words text-center md:text-left text-base md:text-lg">Check what's happening on your Santech Api implementation.</p>
 	  <span className="grid py-10 w-full lg:grid-cols-3 sm:grid-cols-2 grid-cols-1  gap-5 flex-wrap">
 		<Link to="https://santhoshs-organization-1.gitbook.io/santech-api-hub-docs/" className="inline-flex break-all items-baseline gap-3 bg-violet-500 px-3 py-2 rounded-lg text-white shadow-lg justify-center">Documentation <i className="fas fa-arrow-up-right-from-square"></i></Link>
 		<Link to='/dashboard/apis' className="inline-flex items-baseline gap-3 bg-violet-500 px-3 py-2 rounded-lg text-white shadow-lg justify-center">API KEYS <i className="fas fa-key"></i></Link>
