@@ -24,7 +24,6 @@ function Profile() {
       const apiListResponse = await axios.request(recentreq);
       if (apiListResponse.status === 200) {
         const updatedApiList = apiListResponse.data;
-        console.log(updatedApiList);
         const limitedApiList = updatedApiList.slice(-4).reverse() ;
   
         setSubscribedApis(limitedApiList);

@@ -23,11 +23,9 @@ function ApiHubs() {
   };
   const fetchData = async () => {
     setLoading(true);
-    console.log(updatedApi);
     try {
       const response = await axios.request(subscribedapireq);
       const updatedApis = response.data.map(api => ({ ...api, loading: false }));
-      console.log(updatedApis)
       setApis(updatedApis);
       setFilteredApis(updatedApis);
       setLoading(false);
@@ -66,7 +64,6 @@ function ApiHubs() {
       const response = await axios.request(subscribereq);
       if (response.status === 200) {
         setupdatedApi(!updatedApi);
-        console.log(apis);
         toast.info(`${apiItem.name} API is Subscribed`, {
           position: 'top-center',
           autoClose: 5000,
