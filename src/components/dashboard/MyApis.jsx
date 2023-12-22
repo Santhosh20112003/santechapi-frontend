@@ -246,8 +246,7 @@ function Apis() {
       <Tooltip.Root>
         <Tooltip.Trigger asChild><AlertDialog.Root >
     <AlertDialog.Trigger asChild>
-    <button className="text-white fas fa-plus  shadow-blackA4 hover:bg-violet-500 inline-flex h-[35px] w-[35px] items-center justify-center rounded-full bg-violet-600 shadow-[0_2px_10px] outline-none focus:shadow-[0_0_0_2px] focus:shadow-black">
-          
+    <button className="text-white fas fa-plus active:scale-90 transition-all shadow-blackA4 hover:bg-violet-500 inline-flex h-[35px] w-[35px] items-center justify-center rounded-full bg-violet-600 shadow-[0_2px_10px] outline-none focus:shadow-[0_0_0_2px] focus:shadow-black">
           </button>
     </AlertDialog.Trigger>
     <AlertDialog.Portal >
@@ -302,12 +301,12 @@ function Apis() {
                     {token.key}
                   </p>
                   <i
-                    className={`px-3 py-2 border-2 fas ${token.copied ? 'fa-check' : 'fa-clipboard'} ${token.copied ? 'bg-green-200 border-green-400' : 'bg-gray-200 border-gray-400'} text-gray-500 rounded-md`}
+                    className={`px-3 py-2 active:scale-90 transition-all border-2 fas ${token.copied ? 'fa-check' : 'fa-clipboard'} ${token.copied ? 'bg-green-200 border-green-400' : 'bg-gray-200 border-gray-400'} text-gray-500 rounded-md`}
                     onClick={() => copyToClipboard(token.key, index)}
                   ></i>
                    <AlertDialog.Root >
     <AlertDialog.Trigger asChild>
-      <button className="fas fa-trash bg-red-200 border-2 px-3 py-2 border-red-400 text-red-500 rounded-md">
+      <button className="fas fa-trash active:scale-90 transition-all bg-red-200 border-2 px-3 py-2 border-red-400 text-red-500 rounded-md">
       </button>
     </AlertDialog.Trigger>
     <AlertDialog.Portal >
