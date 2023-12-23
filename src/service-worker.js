@@ -85,6 +85,7 @@ self.addEventListener('DOMContentLoaded', () => {
 
       installButton.addEventListener('click', () => {
         // Hide the install prompt
+        console.log("CLicked")
         installButton.style.display = 'none';
 
         // Trigger the PWA install prompt
