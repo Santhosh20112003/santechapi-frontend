@@ -69,30 +69,4 @@ self.addEventListener('message', (event) => {
   }
 });
 
-// Show the install prompt when DOM content is loaded successfully
-self.addEventListener('DOMContentLoaded', () => {
-  // Check if the PWA is already installed
-  if (!window.matchMedia('(display-mode: standalone)').matches) {
-    // Register the install event listener
-    window.addEventListener('beforeinstallprompt', (event) => {
-      // Prevent the default install prompt
-      event.preventDefault();
-
-      // Show your custom install prompt here
-      // Replace `yourInstallButtonId` with the ID of your install button element
-      const installButton = document.getElementById('pwainstall');
-      installButton.style.display = 'block';
-
-      installButton.addEventListener('click', () => {
-        // Hide the install prompt
-        console.log("CLicked")
-        installButton.style.display = 'none';
-
-        // Trigger the PWA install prompt
-        event.prompt();
-      });
-    });
-  }
-});
-
 // Any other custom service worker logic can go here.

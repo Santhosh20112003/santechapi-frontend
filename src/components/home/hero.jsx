@@ -15,7 +15,7 @@ function Hero() {
         
 	
 		<Link to='/register' class="inline-flex text-white bg-violet-500 border-0 py-2 px-6 focus:outline-none hover:bg-violet-600 rounded text-lg">Get Started</Link>
-    <button id='pwainstall' class="inline-flex border-violet-500 border-0 py-2 px-6 focus:outline-none rounded text-lg">Install Now</button>
+    {/* <button id='pwainstall' class="inline-flex border-violet-500 border-0 py-2 px-6 focus:outline-none rounded text-lg">Install Now</button> */}
       </div>
     </div>
     <div class="lg:max-w-2xl hidden lg:flex lg:max-h-xl lg:w-full  md:w-1/2">
