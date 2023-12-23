@@ -80,7 +80,7 @@ self.addEventListener('DOMContentLoaded', () => {
 
       // Show your custom install prompt here
       // Replace `yourInstallButtonId` with the ID of your install button element
-      const installButton = document.getElementById('yourInstallButtonId');
+      const installButton = document.getElementById('pwainstall');
       installButton.style.display = 'block';
 
       installButton.addEventListener('click', () => {
