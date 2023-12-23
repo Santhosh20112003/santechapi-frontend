@@ -1,6 +1,6 @@
 {
-  "short_name": "Santech Api",
-  "name": "Santech Api",
+  "short_name": "Santech API",
+  "name": "Santech API",
   "icons": [
     {
       "src": "favicon.ico",
@@ -19,31 +19,29 @@
     }
   ],
   "start_url": ".",
-  "url": "https://santechapihubs.vercel.app",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff",
-	  "shortcuts" : [
-		{
-		  "name": "My Space - API Keys , Subscribed API",
-		  "url": "/dashboard/apis",
-		  "description": "apikeys and subscribed api list"
-		},
-		{
-		  "name": "ApiHub - List Of Apis",
-		  "url": "/dashboard/hubs",
-		  "description": "List of api page"
-		},
-		{
-		  "name": "Api Docs - Documentation page",
-		  "url": "https://santhoshs-organization-1.gitbook.io/santech-api-hub-docs/",
-		  "description": "Documentation page for apihub"
-		},
-		{
-		  "name": "Contact",
-		  "url": "/contact",
-		  "description": "Contact page"
-		}
-	  ]
-
+  "shortcuts": [
+    {
+      "name": "My Space - API Keys, Subscribed API",
+      "url": "/dashboard/apis",
+      "description": "View your API keys and subscribed APIs"
+    },
+    {
+      "name": "ApiHub - List Of APIs",
+      "url": "/dashboard/hubs",
+      "description": "Browse the list of available APIs"
+    },
+    {
+      "name": "Api Docs - Documentation",
+      "url": "https://santhoshs-organization-1.gitbook.io/santech-api-hub-docs/",
+      "description": "Access the documentation page for API Hub"
+    },
+    {
+      "name": "Contact",
+      "url": "/contact",
+      "description": "Contact page"
+    }
+  ]
 }
