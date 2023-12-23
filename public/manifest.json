@@ -21,5 +21,28 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#ffffff",
+	  "shortcuts" : [
+		{
+		  "name": "My Space - API Keys , Subscribed API",
+		  "url": "/dashboard/apis",
+		  "description": "apikeys and subscribed api list"
+		},
+		{
+		  "name": "ApiHub - List Of Apis",
+		  "url": "/dashboard/hubs",
+		  "description": "List of api page"
+		},
+		{
+		  "name": "Api Docs - Documentation page",
+		  "url": "https://santhoshs-organization-1.gitbook.io/santech-api-hub-docs/",
+		  "description": "Documentation page for apihub"
+		},
+		{
+		  "name": "Contact",
+		  "url": "/contact",
+		  "description": "Contact page"
+		}
+	  ]
+
 }
