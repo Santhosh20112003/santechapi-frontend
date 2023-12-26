@@ -41,6 +41,7 @@ function Navbar() {
                 className={`md:flex md:items-center w-[250px]  md:pb-0 pb-8 absolute md:static md:z-auto left-0 top-0 h-screen z-[30] md:w-auto md:pl-0  md:bg-transparent bg-violet-500 transition-all duration-500 ease-in ${
                   open ? "left-0 z-[-1] " : "left-[-250px] z-[-1]"
                 }`}
+                style={`${open ? 'box-shadow: 15px 3px 18px 0px #21212150;' : ''}`}
               >
                 <span className="flex bg-violet-900 h-[10vh] items-center justify-start  ps-4 w-full gap-1">
                   <img src={require('../assert/santechapi-logo.png')} alt="" className="h-10 w-10" />
