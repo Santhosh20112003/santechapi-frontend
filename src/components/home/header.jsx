@@ -38,14 +38,14 @@ function Nav() {
             </div>
             
             {user ? 
-        (<span className="flex items-center gap-3">
-			<Link to="/dashboard" className="px-3 py-2 font-bold rounded text-gray-600 ">Dashboard</Link>
+        (<span className="hidden md:flex items-center gap-3">
+			 <Link to="/dashboard" className="px-3 py-2 font-bold rounded text-gray-600 ">Dashboard</Link>
 			<button onClick={(e)=>{localStorage.removeItem("token");
             logOut();
             window.location.href="/home"}} className="px-3 py-2 font-bold rounded border-2 bg-violet-500 text-white"><i className="fas fa-arrow-right-to-bracket"></i> Log out </button>
 		    </span>)
         :
-        (<span className="flex items-center gap-3">
+        (<span className="hidden md:flex items-center gap-3">
 			  <Link to="/login" className="px-3 py-2 font-bold rounded text-gray-600 ">Login</Link>
 			   <Link to="/register" className="px-3 py-2 font-bold rounded border-2 bg-violet-500 text-white">Sign Up</Link>
 		     </span>)}
