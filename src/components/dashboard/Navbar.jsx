@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { links, profilepic } from '../common/links';
 import { useUserAuth } from '../context/UserAuthContext';
-import userlogo from '../assert/user.svg'
 import FreeCard from './profilecard';
 
 
@@ -45,9 +44,9 @@ function Navbar() {
               >
                 <span className="flex bg-violet-900 h-[10vh] items-center justify-start  ps-4 w-full gap-1">
                   <img src={require('../assert/santechapi-logo.png')} alt="" className="h-10 w-10" />
-                  <h1 className="text-white text-2xl font-bold">
+                  <Link to="/home" className="text-white text-2xl font-bold">
                     SanTech API
-                  </h1>
+                  </Link>
                   <i
                     onClick={toggleNavbar}
                     className="text-violet-300 fas fa-arrow-left mt-1 text-2xl absolute right-0 pe-2"
