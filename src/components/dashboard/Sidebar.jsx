@@ -13,11 +13,11 @@ function Sidebar() {
                 <span className="text-white text-2xl font-bold ml-2">SanTech Api</span>
               </Link>
             </div>
-            <span className="text-none w-full flex flex-col items-start">
+            <span className=" w-full flex flex-col items-start">
               <span className="flex items-center justify-center w-full mb-5">
               <Link to="home" className='text-lg shadow-lg text-center py-3 mx-5 font-semibold w-full  text-gray-700 rounded-md bg-violet-300' ><i className={`fas fa-house me-2`}></i>Overview</Link>
               </span>
-              {/* <p className="text-xl text-center py-3 font-semibold w-full text-gray-800 ">MENU</p> */}
+             
               <ul className='w-full flex flex-col items-center gap-3'>
                 {links.map((link) => (
                   <Link to={link.link} className={`text-lg text-center py-3 rounded-md transition text-white font-medium w-[80%] ${
@@ -27,9 +27,7 @@ function Sidebar() {
                   </Link>
                 ))}
               </ul>
-              <div className=''>
-                    
-                  </div>
+              
             </span>
             <FreeCard/>
           </div>

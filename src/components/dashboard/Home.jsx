@@ -5,8 +5,6 @@ import hello from "../assert/undraw_fall_thyk.svg";
 import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { secret } from '../common/links';
 
 function Home() {
@@ -35,22 +33,12 @@ function Home() {
 		setapisloading(true);
 		try {
 		const result = await axios.request(fetchcountreq);
-		// if (result.status === 200) {
 		setactivekey(result.data.totalcount);
 		setapikey(result.data.apikeycount);
 		setapis(result.data.apicount);
 		
 		} catch (err) {
-		// toast.success("Unable to fetch Details.", {
-		// position: "top-center",
-		// autoClose: 5000,
-		// hideProgressBar: false,
-		// closeOnClick: true,
-		// pauseOnHover: true,
-		// draggable: true,
-		// progress: undefined,
-		// theme: "colored",
-		// });
+		console.log(err)
 		} finally {
 		setapikeyloading(false);
 		setactivekeyloading(false);
@@ -127,7 +115,6 @@ function Home() {
 			}
 		</span>
 	  </span>
-	  <ToastContainer />
 	</div>
   )
 }
